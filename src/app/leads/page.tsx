@@ -1,6 +1,6 @@
 import { DOMAIN_NAME } from "@/domain"
 import StoreProvider from "@/store/StoreProvider"
-import Leads from "./client/leads"
+import Leads from "./components/leads"
 
 
 async function getData() {
@@ -19,7 +19,7 @@ async function getData() {
 export default async function LeadsPage() {
     const data = await getData()
 
-    return <StoreProvider message={data.message} >
+    return <StoreProvider message={JSON.stringify(data)} >
         <Leads />
     </StoreProvider>
 }

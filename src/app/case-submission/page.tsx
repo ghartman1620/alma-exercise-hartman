@@ -1,4 +1,5 @@
 import { DOMAIN_NAME } from "@/domain"
+import CaseSubmissionForm from "./components/CaseSubmissionForm"
 
 async function getData() {
     const res = await fetch(`${DOMAIN_NAME}/api/hello`)
@@ -16,5 +17,7 @@ async function getData() {
 export default async function CaseSubmissionPage() {
     const data = await getData()
 
-    return data.message
+    return <div>
+        <CaseSubmissionForm message={data.message} />
+    </div>
 }

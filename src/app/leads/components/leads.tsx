@@ -2,9 +2,17 @@
 import { useAppSelector } from "@/store/hooks";
 import { selectLeadsMessage } from "@/store/leadsSlice/leads.selectors";
 import { css } from '@emotion/css'
+import { FC } from "react";
 
+const initialData = {
+    name: 'Send email to Adrian',
+    description: 'Confirm if you have passed the subject\nHereby ...',
+    done: true,
+    recurrence: 'Daily',
+    rating: 3,
+};
 
-export default function Leads() {
+const Leads: FC = () => {
     const leadsMessage = useAppSelector(selectLeadsMessage);
 
     return <div className={css`
@@ -14,3 +22,5 @@ export default function Leads() {
         {leadsMessage}
     </div>;
 }
+
+export default Leads;

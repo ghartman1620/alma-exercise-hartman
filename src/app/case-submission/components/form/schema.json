@@ -1,0 +1,40 @@
+{
+    "type": "object",
+    "properties": {
+        "firstName": {
+            "type": "string"
+        },
+        "lastName": {
+            "type": "string"
+        },
+        "email": {
+            "type": "string"
+        },
+        "linkedInLink": {
+            "type": "string"
+        },
+        "visaTypes": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+                "type": "string",
+                "enum": [
+                    "O-1",
+                    "EB-1A",
+                    "EB-2A NIW",
+                    "I don't know"
+                ]
+            }
+        },
+        "helpInformation": {
+            "type": "string"
+        }
+    },
+    "required": [
+        "firstName",
+        "lastName",
+        "email",
+        "linkedInLink",
+        "visaTypes"
+    ]
+}

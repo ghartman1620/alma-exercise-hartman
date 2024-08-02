@@ -1,0 +1,38 @@
+{
+    "type": "VerticalLayout",
+    "elements": [
+        {
+            "type": "Control",
+            "scope": "#/properties/firstName",
+            "label": "First Name"
+        },
+        {
+            "type": "Control",
+            "scope": "#/properties/lastName",
+            "label": "Last Name"
+        },
+        {
+            "type": "Control",
+            "scope": "#/properties/email",
+            "label": "Email Address"
+        },
+        {
+            "type": "Control",
+            "scope": "#/properties/linkedInLink",
+            "label": "LinkedIn"
+        },
+        {
+            "type": "Control",
+            "scope": "#/properties/visaTypes",
+            "label": "Visa Categories of Interest"
+        },
+        {
+            "type": "Control",
+            "scope": "#/properties/helpInformation",
+            "label": "How can we help you?",
+            "options": {
+                "multi": true
+            }
+        }
+    ]
+}
