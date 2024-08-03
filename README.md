@@ -69,6 +69,9 @@ In the interest of time, I did not complete some of the functional requirements.
 * EmotionJS for component styling. I don't have a strong opinions between css-in-js versus module CSS and emotion versus any other css-in-js library. However, I do prefer both to global styles. Global stylesheets make it very easy for developers to mistakenly overwrite one anothers' styles in a growing application, while module CSS and css-in-js ensure that the CSS a developer writes only affects the component for which it was written.
 * JsonForms for building the case submission form in a configuration driven way. I'd not used JsonForms before, and I enjoyed reducing the amount of code necessary to implement a form - a very common task. In my past experience, I've written helper components to make object configuration based forms, and JsonForms handled this nicely.
 
+## Code Source Notes
+* I've bootstrapped much of my code with create-next-app and documentation examples from the redux-toolkit, nextjs, and jsonforms sites. Many comments left by documentation authors remain - in cases where I did draw code verbatim from other sources, I see no reason to obfuscate that fact.
+
 ## Future Functional Improvements
 In addition to the listed functional requirements that were not yet implemented, additional future functional improvements that I would like to add:
 * The loading experience when submitting a case is very poor and it's unclear that anything is happening. This should certainly be improved to at least add a simple loading spinner.
@@ -81,5 +84,6 @@ If I were to continue working on this application, I would consider the followin
 * The CaseSubmissionForm component is too large and has too much business logic. Upon a code review and iteration, I would split apart the submission logic and error state management into hooks to reduce the concerns of the component itself to only rendering.
 * Naturally, this authentication system is no good at actually securing the internal leads UI. Given an expansion of this application my first choice would be to adopt an existing authentication system such as OAuth.
 * There are a few deprecated packages in the dependencies. I'd want to look into those before much longer in future development of this application. 
+* There's a certain amount of duplication in the fetch code. I would very likely write my own wrapper around fetch before long in continuing this project.
 
 I appreciate your reading my documents and code. Thank you again for your consideration!
