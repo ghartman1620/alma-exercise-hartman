@@ -3,10 +3,11 @@ import StoreProvider from "@/store/StoreProvider"
 import Leads from "./components/leads"
 
 
-async function getData() {
-    const res = await fetch(`${DOMAIN_NAME}/api/leads`)
+async function getData(searchParams: { [key: string]: string | string[] | undefined } | undefined) {
+    const res = await fetch(`${DOMAIN_NAME}/api/leads?auth=${searchParams?.auth ?? ''}`, { next: { tags: ['leads'] } })
     // The return value is *not* serialized
     // You can return Date, Map, Set, etc.
+
 
     if (!res.ok) {
         // This will activate the closest `error.js` Error Boundary
@@ -16,10 +17,12 @@ async function getData() {
     return res.json()
 }
 
-export default async function LeadsPage() {
-    const data = await getData()
+export default async function LeadsPage({
+    searchParams
+}: { searchParams?: { [key: string]: string | string[] | undefined }; }) {
+    const data = await getData(searchParams)
 
-    return <StoreProvider message={JSON.stringify(data)} >
+    return <StoreProvider leads={data}>
         <Leads />
     </StoreProvider>
 }

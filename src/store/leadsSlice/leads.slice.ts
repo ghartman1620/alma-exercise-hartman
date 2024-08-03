@@ -1,25 +1,34 @@
 import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
 
+export interface Lead {
+    firstName: string,
+    lastName: string,
+    email: string,
+    linkedInLink: string,
+    visaTypes: string[],
+    helpInformation: string,
+    status: string,
+}
 export interface LeadsState {
-    message: string
+    leads: Lead[]
 }
 
 const initialState: LeadsState = {
-    message: '',
+    leads: []
 }
 
 export const leadsSlice = createSlice({
     name: 'leads',
     initialState,
     reducers: {
-        setMessage: (state, action: PayloadAction<string>) => {
-            state.message = action.payload
+        setLeads: (state, action: PayloadAction<Lead[]>) => {
+            state.leads = action.payload
         }
     },
 })
 
 // Action creators are generated for each case reducer function
-export const { setMessage } = leadsSlice.actions
+export const { setLeads } = leadsSlice.actions
 
 export default leadsSlice.reducer

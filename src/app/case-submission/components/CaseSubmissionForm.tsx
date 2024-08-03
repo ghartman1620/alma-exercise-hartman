@@ -1,13 +1,15 @@
 'use client'
-import { FC, useState } from "react";
-import schema from './form/schema.json';
-import uischema from './form/uischema.json';
+import { useState } from "react";
+import schema from './case-submission-form/schema.json';
+import uischema from './case-submission-form/uischema.json';
 import { JsonForms } from '@jsonforms/react';
-import { materialRenderers, materialCells } from "@jsonforms/material-renderers";
+import { materialRenderers } from "@jsonforms/material-renderers";
 import { css } from "@emotion/css";
 import isEmailValid from "../validation/isEmailValid";
 import { ErrorObject } from 'ajv';
 import { ValidationMode } from "@jsonforms/core";
+import revalidateLeads from "@/app/leads/revalidateLeads";
+import { useRouter } from 'next/navigation'
 
 interface CaseSubmissionFormType {
     firstName: string,
@@ -27,24 +29,20 @@ const initialData: CaseSubmissionFormType = {
     helpInformation: '',
 };
 
-const CaseSubmissionForm = ({
-    message
-}: {
-    message: string,
-}) => {
+const CaseSubmissionForm = () => {
+    const router = useRouter();
     const [data, setData] = useState<CaseSubmissionFormType>();
     const [validationMode, setValidationMode] = useState<ValidationMode>('ValidateAndHide');
     const [anyFormErrorsPresent, setAnyFormErrorsPresent] = useState<boolean>(false);
     const [additionalErrors, setAdditionalErrors] = useState<ErrorObject[]>([]);
+    const [loading, setIsLoading] = useState(false);
 
     const onChange = ({ data, errors }: { data: CaseSubmissionFormType, errors: any[] }) => {
-        console.log(data, errors);
         setData(data);
         setAnyFormErrorsPresent(!!errors.length);
     };
 
     const submit = async () => {
-        console.log('submitting', data);
 
         const isEmailPresentAndValid: boolean = !data?.email || isEmailValid(data.email)
         if (!isEmailPresentAndValid) {
@@ -62,20 +60,27 @@ const CaseSubmissionForm = ({
         if (!isEmailPresentAndValid || anyFormErrorsPresent) {
             setValidationMode('ValidateAndShow');
         } else {
+            setIsLoading(true);
             const response = await fetch('/api/leads', {
                 method: 'POST',
                 body: JSON.stringify(data),
             })
-            // submit form
+            if (response.ok) {
+                revalidateLeads();
+                router.push('/thank-you');
+            }
+            setIsLoading(false);
         }
     }
 
     return (
         <div className={css`
-            width: 70%;
+            width: 60%;
             margin: auto;
         `}>
+            <h2>Get an Assessment of your Immigration Case</h2>
             <JsonForms
+                readonly={loading}
                 schema={schema}
                 uischema={uischema}
                 data={data}
@@ -84,7 +89,7 @@ const CaseSubmissionForm = ({
                 validationMode={validationMode}
                 additionalErrors={additionalErrors}
             />
-            <button name="Submit" onClick={submit}>Submit</button>
+            <button name="Submit" disabled={loading} onClick={submit}>Submit</button>
         </div>
     )
 
