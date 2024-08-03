@@ -1,12 +1,12 @@
-'use client'
-import { JsonForms } from "@jsonforms/react"
+'use client';
+import { JsonForms } from '@jsonforms/react';
 import schema from './login-form/schema.json';
 import uischema from './login-form/uischema.json';
-import { materialRenderers } from "@jsonforms/material-renderers";
-import { useState } from "react";
-import { useRouter } from 'next/navigation'
+import { materialRenderers } from '@jsonforms/material-renderers';
+import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { ErrorObject } from 'ajv';
-import { css } from "@emotion/css";
+import { css } from '@emotion/css';
 
 
 const LoginForm = () => {
@@ -22,7 +22,6 @@ const LoginForm = () => {
 
         if (loginResponse.ok) {
             const token = await loginResponse.text();
-            console.log(token);
             router.push(`/leads?auth=${token}`);
         } else {
             setAdditionalErrors([
@@ -35,7 +34,7 @@ const LoginForm = () => {
                 }
             ]);
         }
-    }
+    };
 
     return (
         <div className={css`
@@ -51,7 +50,7 @@ const LoginForm = () => {
             />
             <button name="Submit" onClick={submit}>Submit</button>
         </div>
-    )
+    );
 };
 
 export default LoginForm;

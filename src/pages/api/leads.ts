@@ -1,4 +1,4 @@
-import type { NextApiRequest, NextApiResponse } from 'next'
+import type { NextApiRequest, NextApiResponse } from 'next';
 import { MOCK_AUTH_TOKEN } from './login';
 
 
@@ -21,15 +21,15 @@ interface CaseSubmissionFormType {
 // An in-memory object to simulate a database for the exercise. 
 const leadsMockDatabase: CaseSubmissionFormType[] = [
     {
-        firstName: "Jorge",
-        lastName: "Ruiz",
-        email: "jorge.ruiz@gmail.com",
-        linkedInLink: "https://www.linkedin.com/in/gabriel-hartman-8b91b3172/",
-        visaTypes: ["O-1"],
-        helpInformation: "seeking assistance with renewal",
+        firstName: 'Jorge',
+        lastName: 'Ruiz',
+        email: 'jorge.ruiz@gmail.com',
+        linkedInLink: 'https://www.linkedin.com/in/gabriel-hartman-8b91b3172/',
+        visaTypes: ['O-1'],
+        helpInformation: 'seeking assistance with renewal',
         status: LeadStatus.PENDING,
     }
-]
+];
 
 const handleLeadSubmission = (
     req: NextApiRequest,
@@ -43,28 +43,24 @@ const handleLeadSubmission = (
         ...leadFormSubmission,
         status: LeadStatus.PENDING,
     });
-    console.log('added a lead', leadsMockDatabase);
     res.status(200).send('success');
 };
 
 const handleLeadGet = (
     res: NextApiResponse<CaseSubmissionFormType[]>
 ) => {
-    console.log('hello from successful lead get request');
     res.status(200).json(leadsMockDatabase);
-}
+};
 export default function handleLeadsRequest(
     req: NextApiRequest,
     res: NextApiResponse<CaseSubmissionFormType[] | string>
 ) {
-    console.log('hello from leads request');
-    console.log(leadsMockDatabase);
     if (req.method === 'POST') {
         handleLeadSubmission(req, res);
     } else {
         if (req.query.auth !== MOCK_AUTH_TOKEN) {
             res.status(403)
-                .send('Forbidden')
+                .send('Forbidden');
         } else {
             handleLeadGet(res);
         }

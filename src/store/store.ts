@@ -1,13 +1,13 @@
-import { configureStore } from '@reduxjs/toolkit'
-import leadsReducer from './leadsSlice/leads.slice'
+import { configureStore } from '@reduxjs/toolkit';
+import leadsReducer from './leadsSlice/leads.slice';
 
 export const makeStore = () => {
     return configureStore({
         reducer: {
             leads: leadsReducer
         }
-    })
-}
+    });
+};
 
 // Infer the type of makeStore
 export type AppStore = ReturnType<typeof makeStore>

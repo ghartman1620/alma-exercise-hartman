@@ -1,5 +1,5 @@
-import { createSlice } from '@reduxjs/toolkit'
-import type { PayloadAction } from '@reduxjs/toolkit'
+import { createSlice } from '@reduxjs/toolkit';
+import type { PayloadAction } from '@reduxjs/toolkit';
 
 export interface Lead {
     firstName: string,
@@ -16,19 +16,19 @@ export interface LeadsState {
 
 const initialState: LeadsState = {
     leads: []
-}
+};
 
 export const leadsSlice = createSlice({
     name: 'leads',
     initialState,
     reducers: {
         setLeads: (state, action: PayloadAction<Lead[]>) => {
-            state.leads = action.payload
+            state.leads = action.payload;
         }
     },
-})
+});
 
 // Action creators are generated for each case reducer function
-export const { setLeads } = leadsSlice.actions
+export const { setLeads } = leadsSlice.actions;
 
-export default leadsSlice.reducer
+export default leadsSlice.reducer;

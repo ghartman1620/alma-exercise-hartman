@@ -1,8 +1,8 @@
-'use client'
-import { useAppSelector } from "@/store/hooks";
-import { selectLeads } from "@/store/leadsSlice/leads.selectors";
-import { Lead } from "@/store/leadsSlice/leads.slice";
-import { css } from '@emotion/css'
+'use client';
+import { useAppSelector } from '@/store/hooks';
+import { selectLeads } from '@/store/leadsSlice/leads.selectors';
+import { Lead } from '@/store/leadsSlice/leads.slice';
+import { css } from '@emotion/css';
 
 
 const Leads = () => {
@@ -37,6 +37,6 @@ const Leads = () => {
             </tbody>
         </table>
     </div>;
-}
+};
 
 export default Leads;

@@ -1,4 +1,4 @@
-import type { NextApiRequest, NextApiResponse } from 'next'
+import type { NextApiRequest, NextApiResponse } from 'next';
 import { MOCK_AUTH_TOKEN } from './login';
 
 export default function handleLoginRequest(
@@ -12,6 +12,6 @@ export default function handleLoginRequest(
             .send('Success');
     } else {
         res.status(403)
-            .send("Invalid username or password");
+            .send('Invalid username or password');
     }
 }

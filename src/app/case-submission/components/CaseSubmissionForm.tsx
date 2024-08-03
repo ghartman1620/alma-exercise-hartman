@@ -1,15 +1,15 @@
-'use client'
-import { useState } from "react";
+'use client';
+import { useState } from 'react';
 import schema from './case-submission-form/schema.json';
 import uischema from './case-submission-form/uischema.json';
 import { JsonForms } from '@jsonforms/react';
-import { materialRenderers } from "@jsonforms/material-renderers";
-import { css } from "@emotion/css";
-import isEmailValid from "../validation/isEmailValid";
+import { materialRenderers } from '@jsonforms/material-renderers';
+import { css } from '@emotion/css';
+import isEmailValid from '../validation/isEmailValid';
 import { ErrorObject } from 'ajv';
-import { ValidationMode } from "@jsonforms/core";
-import revalidateLeads from "@/app/leads/revalidateLeads";
-import { useRouter } from 'next/navigation'
+import { ValidationMode } from '@jsonforms/core';
+import revalidateLeads from '@/app/leads/revalidateLeads';
+import { useRouter } from 'next/navigation';
 
 interface CaseSubmissionFormType {
     firstName: string,
@@ -44,7 +44,7 @@ const CaseSubmissionForm = () => {
 
     const submit = async () => {
 
-        const isEmailPresentAndValid: boolean = !data?.email || isEmailValid(data.email)
+        const isEmailPresentAndValid: boolean = !data?.email || isEmailValid(data.email);
         if (!isEmailPresentAndValid) {
             setAdditionalErrors([
                 {
@@ -54,7 +54,7 @@ const CaseSubmissionForm = () => {
                     keyword: '',
                     params: {},
                 }
-            ])
+            ]);
             setAnyFormErrorsPresent(true);
         }
         if (!isEmailPresentAndValid || anyFormErrorsPresent) {
@@ -64,14 +64,14 @@ const CaseSubmissionForm = () => {
             const response = await fetch('/api/leads', {
                 method: 'POST',
                 body: JSON.stringify(data),
-            })
+            });
             if (response.ok) {
                 revalidateLeads();
                 router.push('/thank-you');
             }
             setIsLoading(false);
         }
-    }
+    };
 
     return (
         <div className={css`
@@ -91,7 +91,7 @@ const CaseSubmissionForm = () => {
             />
             <button name="Submit" disabled={loading} onClick={submit}>Submit</button>
         </div>
-    )
+    );
 
 };
 
